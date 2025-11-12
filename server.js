@@ -38,25 +38,16 @@ app.get('/pessoas/ver/:id', (req,res) => {
     res.render('detalharPessoa',{ pessoa });
 });
 
+app.post('/pessoas/excluir/:id', req, res) => {
+    const id = parseInt(req.params.id);
+    const index = pessoas.findIndex(p => p.id ===id);
 
+    if(index === -1) return res.status(404).send('Pessoa não encontrada');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    pessoas.splice(index, 1);
+    res.redirect('/pessoas');
+    
+}
 
 
 
@@ -65,4 +56,5 @@ app.get('/pessoas/ver/:id', (req,res) => {
 
 app.listen(port, () => {
     console,log('servidor em execução: http://localhost:${port}');
+
 });
